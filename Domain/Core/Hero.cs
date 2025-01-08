@@ -14,6 +14,15 @@ public class Hero : AuditableEntity
 
 	public Hero() {}
 
+	public void Update (
+		string name,
+		string ability,
+		int powerLevel)
+	{
+		Name = name;
+		Ability = ability;
+		PowerLevel = powerLevel;
+	}
 
 	public override string ToString()
 	{
