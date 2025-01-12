@@ -21,6 +21,6 @@ public class ListHeroesQueryHandler : IRequestHandler<ListHeroesQuery, List<Hero
 
 	public async Task<List<Hero>> Handle(ListHeroesQuery qry,CancellationToken token)
 	{
-		return await _context.Heroes.ToListAsync(token);
+		return await _context.Heroes!.ToListAsync(token);
 	}
 }

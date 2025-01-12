@@ -20,6 +20,6 @@ public class GetHeroesQueryHandler : IRequestHandler<GetHeroesQuery, Hero?>
 
 	public async Task<Hero?> Handle(GetHeroesQuery qry, CancellationToken token)
 	{
-		return await _context.Heroes.FindAsync(qry.Id, token);
+		return await _context.Heroes!.FindAsync(qry.Id, token);
 	}
 }
