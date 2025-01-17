@@ -18,7 +18,7 @@ public class RemoveHeroCommandHandler : IRequestHandler<RemoveHeroCommand>
 
 	public async Task Handle(RemoveHeroCommand cmd, CancellationToken token)
 	{
-		var hero = await _context.Heroes.FindAsync(cmd.Id, token);
+		var hero = await _context.Heroes!.FindAsync(cmd.Id, token);
 
 		// additional validation here
 		 

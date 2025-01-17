@@ -3,7 +3,8 @@ using Domain.Core;
 using Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Applicatiion.Organizations.Queries;
+
+namespace Application.Organizations.Queries;
 
 
 public record ListOrganizationsQuery() : IRequest<List<Organization>>;
@@ -17,7 +18,6 @@ public class ListOrganizationQueryHandler : IRequestHandler<ListOrganizationsQue
 	{
 		_context = context;
 	}
-
 
 	public async Task<List<Organization>> Handle(ListOrganizationsQuery qry, CancellationToken token)
 	{

@@ -25,7 +25,7 @@ public class UpdateHeroCommandHandler : IRequestHandler<UpdateHeroCommand>
 
 	public async Task Handle(UpdateHeroCommand cmd, CancellationToken token)
 	{
-		var hero = await _context.Heroes.FindAsync(cmd.Id, token);
+		var hero = await _context.Heroes!.FindAsync(cmd.Id, token);
 
 		// additional validation here
 

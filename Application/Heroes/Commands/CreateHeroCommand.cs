@@ -31,8 +31,7 @@ public class CreateHeroCommandHandler : IRequestHandler<CreateHeroCommand, int>
 			PowerLevel = cmd.PowerLevel
 		};
 
-
-		_context.Heroes.Add(hero);
+		_context.Heroes!.Add(hero);
 
 		return await _context.SaveChangesAsync(token);
 	}
