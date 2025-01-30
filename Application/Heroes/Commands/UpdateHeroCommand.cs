@@ -10,10 +10,10 @@ public record UpdateHeroCommand (
 	string Name,
 	string Ability,
 	int PowerLevel
-) : IRequest;
+) : IRequest<int>;
 
 
-public class UpdateHeroCommandHandler : IRequestHandler<UpdateHeroCommand>
+public class UpdateHeroCommandHandler : IRequestHandler<UpdateHeroCommand, int>
 {
 	private readonly IApplicationDbContext _context;
 
@@ -23,7 +23,7 @@ public class UpdateHeroCommandHandler : IRequestHandler<UpdateHeroCommand>
 	}
 
 
-	public async Task Handle(UpdateHeroCommand cmd, CancellationToken token)
+	public async Task<int> Handle(UpdateHeroCommand cmd, CancellationToken token)
 	{
 		var hero = await _context.Heroes!.FindAsync(cmd.Id, token);
 
@@ -33,6 +33,6 @@ public class UpdateHeroCommandHandler : IRequestHandler<UpdateHeroCommand>
 
 		_context.Heroes.Update(hero);
 
-		await _context.SaveChangesAsync(token);
+		return await _context.SaveChangesAsync(token);
 	}
 }

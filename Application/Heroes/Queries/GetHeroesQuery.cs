@@ -6,10 +6,10 @@ using Application.Common.Interfaces;
 namespace Application.Heroes.Queries;
 
 
-public record GetHeroesQuery (Guid Id) : IRequest<Hero?>;
+public record GetHeroQuery (Guid Id) : IRequest<Hero?>;
 
 
-public class GetHeroesQueryHandler : IRequestHandler<GetHeroesQuery, Hero?>
+public class GetHeroesQueryHandler : IRequestHandler<GetHeroQuery, Hero?>
 {
 	private readonly IApplicationDbContext _context;
 
@@ -18,7 +18,7 @@ public class GetHeroesQueryHandler : IRequestHandler<GetHeroesQuery, Hero?>
 		_context = context;
 	}
 
-	public async Task<Hero?> Handle(GetHeroesQuery qry, CancellationToken token)
+	public async Task<Hero?> Handle(GetHeroQuery qry, CancellationToken token)
 	{
 		return await _context.Heroes!.FindAsync(qry.Id, token);
 	}

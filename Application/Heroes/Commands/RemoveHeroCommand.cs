@@ -4,10 +4,10 @@ using Application.Common.Interfaces;
 namespace Application.Heroes.Commands;
 
 
-public record RemoveHeroCommand(Guid Id) : IRequest;
+public record RemoveHeroCommand(Guid Id) : IRequest<int>;
 
 
-public class RemoveHeroCommandHandler : IRequestHandler<RemoveHeroCommand>
+public class RemoveHeroCommandHandler : IRequestHandler<RemoveHeroCommand, int>
 {
 	private readonly IApplicationDbContext _context;
 
@@ -16,7 +16,7 @@ public class RemoveHeroCommandHandler : IRequestHandler<RemoveHeroCommand>
 		_context = context;
 	}
 
-	public async Task Handle(RemoveHeroCommand cmd, CancellationToken token)
+	public async Task<int> Handle(RemoveHeroCommand cmd, CancellationToken token)
 	{
 		var hero = await _context.Heroes!.FindAsync(cmd.Id, token);
 
@@ -25,6 +25,6 @@ public class RemoveHeroCommandHandler : IRequestHandler<RemoveHeroCommand>
 		_context.Heroes.Remove(hero!); 
 
 
-		await _context.SaveChangesAsync(token);
+		return await _context.SaveChangesAsync(token);
 	}
 }
