@@ -5,10 +5,10 @@ using Application.Common.Interfaces;
 namespace Application.Organizations.Commands;
 
 
-public record UpdateOrganizationCommand(Guid Id, string Name) : IRequest;
+public record UpdateOrganizationCommand(Guid Id, string Name) : IRequest<int>;
 
 
-public class UpdateOrganizationCommandHandler : IRequestHandler<UpdateOrganizationCommand>
+public class UpdateOrganizationCommandHandler : IRequestHandler<UpdateOrganizationCommand, int>
 {
 	private readonly IApplicationDbContext _context;
 
@@ -17,7 +17,7 @@ public class UpdateOrganizationCommandHandler : IRequestHandler<UpdateOrganizati
 		_context = context;
 	}
 
-	public async Task Handle(UpdateOrganizationCommand cmd, CancellationToken token)
+	public async Task<int> Handle(UpdateOrganizationCommand cmd, CancellationToken token)
 	{
 		var org = await _context.Organizations!.FindAsync(cmd.Id, token);
 
@@ -27,6 +27,6 @@ public class UpdateOrganizationCommandHandler : IRequestHandler<UpdateOrganizati
 
 		_context.Organizations.Update(org);
 
-		await _context.SaveChangesAsync(token);
+		return await _context.SaveChangesAsync(token);
 	}
 }

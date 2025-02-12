@@ -1,11 +1,10 @@
 using FluentValidation;
-using Domain.Core;
 
 
 namespace Application.Organizations.Commands;
 
 
-public class CreateOrganizationCommandValidator : AbstractValidator<Organization>
+public class CreateOrganizationCommandValidator : AbstractValidator<CreateOrganizationCommand>
 {
 	public CreateOrganizationCommandValidator()
 	{

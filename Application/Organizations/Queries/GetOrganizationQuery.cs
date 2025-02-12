@@ -20,6 +20,6 @@ public class GetOrganizationQueryHandler : IRequestHandler<GetOrganizationQuery,
 
 	public async Task<Organization?> Handle (GetOrganizationQuery qry, CancellationToken token)
 	{
-		return await _context.Organizations!.FindAsync(qry, token);
+		return await _context.Organizations!.FindAsync(qry.Id, token);
 	}
 }

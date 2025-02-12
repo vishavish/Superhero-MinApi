@@ -7,7 +7,6 @@ namespace Application.Organizations.Commands;
 
 
 public record CreateOrganizationCommand(
-	Guid Id,
 	string Name
 ) : IRequest<int>;
 

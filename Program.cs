@@ -18,5 +18,6 @@ if (app.Environment.IsDevelopment())
 
 WeatherEndpoints.Map(app);
 HeroEndpoints.Map(app);
+OrganizationEndpoints.Map(app);
 
 app.Run();

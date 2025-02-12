@@ -64,7 +64,6 @@ public static class HeroEndpoints
 	
 	public static async Task<IResult> RemoveHero(ISender sender, [FromBody]RemoveHeroCommand cmd)
 	{
-		await sender.Send(cmd);
-		return Results.Ok();
+		return Results.Ok(await sender.Send(cmd));
 	}
 }

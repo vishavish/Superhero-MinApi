@@ -5,10 +5,10 @@ using Application.Common.Interfaces;
 namespace Application.Organizations.Commands;
 
 
-public record RemoveOrganizationCommand(Guid Id) : IRequest;
+public record RemoveOrganizationCommand(Guid Id) : IRequest<int>;
 
 
-public class RemoveOrganizationCommandHandler : IRequestHandler<RemoveOrganizationCommand>
+public class RemoveOrganizationCommandHandler : IRequestHandler<RemoveOrganizationCommand, int>
 {
 	private readonly IApplicationDbContext _context;
 
@@ -18,7 +18,7 @@ public class RemoveOrganizationCommandHandler : IRequestHandler<RemoveOrganizati
 	}
 
 
-	public async Task Handle(RemoveOrganizationCommand cmd, CancellationToken token)
+	public async Task<int> Handle(RemoveOrganizationCommand cmd, CancellationToken token)
 	{
 		var org = await _context.Organizations!.FindAsync(cmd.Id, token);
 
@@ -27,6 +27,6 @@ public class RemoveOrganizationCommandHandler : IRequestHandler<RemoveOrganizati
 		_context.Organizations.Remove(org!);
 
 
-		await _context.SaveChangesAsync(token);
+		return await _context.SaveChangesAsync(token);
 	}
 }
